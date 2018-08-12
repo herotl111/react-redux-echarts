@@ -9,13 +9,14 @@ import AvgAgeBarChart from './containers/AvgAgeBarChart';
 import PopulationBarChart from './containers/PopulationBarChart';
 import UnemploymentRateBarChart from './containers/UnemploymentRateBarChart';
 import MapC from './containers/MapC';
+import TopHeaderC from './containers/TopHeaderC';
 
 class App extends Component {
   
   render() {
     return (
       <div>
-      <Navbar inverse collapseOnSelect>
+      <Navbar style={{marginBottom: "0"}} inverse collapseOnSelect>
       <Navbar.Header>
         <Navbar.Brand>
           <a href="#brand">Demo Program</a>
@@ -46,6 +47,7 @@ class App extends Component {
       </Navbar.Collapse>
     </Navbar>
       <Jumbotron>
+        <Row><Col md={1}></Col><Col md={3}><TopHeaderC/></Col></Row>
         <Row>
           <Col md={1}></Col>
           <Col md={2}><YearChart/></Col>
