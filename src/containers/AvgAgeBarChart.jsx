@@ -1,7 +1,8 @@
 import {connect} from 'react-redux';
 import EChart from '../components/EChart';
 import {toggleName} from '../actions/FilterAction';
-import rawData from '../data/historicalData'
+// import rawData from '../data/historicalData'
+import {avgAgeFilter} from '../selectors/AvgAgeFilter';
 
 const getOption = () =>{
     return {
@@ -47,27 +48,8 @@ const getOption = () =>{
   }
 
 const mapStateToProps = (state) =>{
-    let records = rawData;
-    if(state.filters.segment !== 'ALL'){
-        records = records.filter(e=>e.Segment === state.filters.segment);
-    }
-
-    if(state.filters.name !== 'ALL'){
-        records = records.filter(e=>e.Name === state.filters.name);
-    }
-
-    if(state.filters.year !== 'ALL'){
-        records = records.filter(e=>e.Year === state.filters.year);
-    }
-
-    let data = [0,0,0,0,0]
-    records.forEach(e=>{
-        let roundedValue = Math.floor(e['Average Age in years']/10);
-        data[roundedValue-2]++;
-    });
-
     let option = getOption();
-    option.series[0].data = data;
+    option.series[0].data = avgAgeFilter(state);
     return {option}
 }
 

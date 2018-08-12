@@ -1,7 +1,7 @@
 import {connect} from 'react-redux';
 import EChart from '../components/EChart';
 import {toggleName} from '../actions/FilterAction';
-import rawData from '../data/historicalData'
+import {nameFilter} from '../selectors/NameFilter';
 
 const getOption = () =>{
     return {
@@ -33,31 +33,9 @@ const getOption = () =>{
   }
 
 const mapStateToProps = (state) =>{
-    let data = [];
-    let records = rawData;
-    if(state.filters.segment !== 'ALL'){
-        records = records.filter(e=>e.Segment === state.filters.segment);
-    }
-
-    if(state.filters.year !== 'ALL'){
-        records = records.filter(e=>e.Year === state.filters.year);
-    }
-
-    if(state.filters.name === 'ALL'){
-        records.forEach((e)=>{
-            let index = data.findIndex(chartElement=>chartElement.name === e.Name);
-            if(index === -1){
-                data.push({value:1, name: e.Name});
-            }else{
-                data[index].value ++;
-            }
-        });
-    }else{
-        let count = records.filter(e => e.Name===state.filters.name).length;
-        data.push({value:count, name:state.filters.name});
-    }
+    
     let option = getOption();
-    option.series[0].data = data;
+    option.series[0].data = nameFilter(state);
     return {option}
 }
 

@@ -1,7 +1,7 @@
 import {connect} from 'react-redux';
 import EChart from '../components/EChart';
 import {toggleName} from '../actions/FilterAction';
-import rawData from '../data/historicalData'
+import {avgPersonPerHouseholdFilter} from '../selectors/AvgPersonPerHouseholdFilter';
 
 const getOption = () =>{
     return {
@@ -47,27 +47,8 @@ const getOption = () =>{
   }
 
 const mapStateToProps = (state) =>{
-    let records = rawData;
-    if(state.filters.segment !== 'ALL'){
-        records = records.filter(e=>e.Segment === state.filters.segment);
-    }
-
-    if(state.filters.name !== 'ALL'){
-        records = records.filter(e=>e.Name === state.filters.name);
-    }
-
-    if(state.filters.year !== 'ALL'){
-        records = records.filter(e=>e.Year === state.filters.year);
-    }
-
-    let data = [0,0,0,0,0]
-    records.forEach(e=>{
-        let roundedValue = Math.round(e['Average Persons per Household']);
-        data[roundedValue-2]++;
-    });
-
     let option = getOption();
-    option.series[0].data = data;
+    option.series[0].data = avgPersonPerHouseholdFilter(state);
     return {option}
 }
 
