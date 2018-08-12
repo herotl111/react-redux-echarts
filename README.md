@@ -1,5 +1,5 @@
 ## React + Redux + Echarts Visualization 
-This solution is build using React, Redux and Echarts to visualize data.
+This solution is build using React, Redux and Echarts to visualize data. See Live Demo here [https://herotl111.github.io].
 
 ### Start Development Env
 In the project directory, you can run:
