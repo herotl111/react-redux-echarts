@@ -3,6 +3,7 @@ This solution is build using React, Redux and Echarts to visualize data. See Liv
 
 ### Start Development Env
 In the project directory, you can run:
+`npm install`
 `npm start`
 
 Runs the app in the development mode.<br>
